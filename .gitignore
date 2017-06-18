@@ -63,7 +63,6 @@ $RECYCLE.BIN/
 *.lnk
 *.classpath
 *.project
-FrogAPI/.settings/org.eclipse.jdt.core.prefs
-FrogClient/.settings/org.eclipse.jdt.core.prefs
 *.prefs
+/.settings/
 /bin/
