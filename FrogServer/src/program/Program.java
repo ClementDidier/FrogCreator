@@ -68,6 +68,8 @@ public class Program
 				// Attente d'une connexion entrante
 				Socket clientSocket = server.accept();
 				
+				System.out.println("Nouveau client accepté !");
+				
 				// Ajout du client stub dans la pool
 				threadPool.submit(new ClientWorker(clientSocket, requestManager));
 			}

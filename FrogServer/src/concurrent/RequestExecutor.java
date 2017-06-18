@@ -23,20 +23,24 @@ public class RequestExecutor extends Thread
 		{
 			try 
 			{
+				// Prend une tâche à réaliser
 				FrogTask task = this.queue.take();
+				// Extrait la requête associée
 				Request request = task.getRequest();
 				RequestResult result = new RequestResult(); // Resultat de l'execution
 				
 				// Recherche et execution synchronisée de la requete
 				switch(request.getType())
 				{
-					case NONE:
+					case CONNECT:
+						System.out.println("Connect request synch execution DONE");
 						break;
 					default:
+						System.out.println("Default request received...");
 						break;
 				}
 				
-				// Callback
+				// Extrait le callback de la requête
 				RequestExecutionFinishedListener callback = task.getCallback();
 				if(callback != null)
 					callback.requestExecutionFinished(result);

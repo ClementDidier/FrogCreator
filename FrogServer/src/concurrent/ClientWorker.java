@@ -7,6 +7,7 @@ import java.net.Socket;
 
 import com.frog.net.Request;
 import com.frog.net.RequestResult;
+import com.frog.net.RequestType;
 
 import program.Program;
 
@@ -34,7 +35,15 @@ public class ClientWorker implements Runnable, RequestExecutionFinishedListener
 		{
 			// Logique cliente
 			// TODO: Lecture et execution des requètes reçues
-			this.manager.submit(new Request(), this);
+			try {
+				String str = this.in.readLine();
+				if(str == "1")
+					this.manager.submit(new Request(RequestType.CONNECT), this);
+			} catch (IOException e) {
+				e.printStackTrace();
+				break;
+			}
+			
 		}
 	}
 
