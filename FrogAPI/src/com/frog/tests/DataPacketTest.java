@@ -1,18 +1,21 @@
 package com.frog.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.frog.net.DataPacket;
 
 public class DataPacketTest 
 {
-	@Before
-	public void before()
+	@Test(expected=OutOfMemoryError.class)
+	public void dataPacketOutOfMemoryReadByte()
 	{
-		
+		DataPacket packet = new DataPacket();
+		packet.readByte();
+		fail("La fonction n'a pas remontée l'exception attendue");
 	}
 	
 	@Test
@@ -146,5 +149,25 @@ public class DataPacketTest
 		packet.resetPointer();
 		assertEquals("Valeur lue (double) incorrecte", Double.MIN_VALUE, packet.readDouble(), 0.0001);
 		assertEquals("Valeur lue (double) incorrecte", Double.MAX_VALUE, packet.readDouble(), 0.0001);
+	}
+	
+	@Test
+	public void dataPacketReadString()
+	{
+		DataPacket packet = new DataPacket();
+		
+		String s1 = "Account";
+		String s2 = "Password";
+		String s3 = "azertyuiop^qsdfghjklmwxcvbn,;:!";
+		
+		packet.write(s1);
+		packet.write(s2);
+		packet.write(s3);
+		
+		packet.resetPointer();
+		
+		assertEquals("Valeur lue (string) incorrecte", s1, packet.readString());
+		assertEquals("Valeur lue (string) incorrecte", s2, packet.readString());
+		assertEquals("Valeur lue (string) incorrecte", s3, packet.readString());
 	}
 }

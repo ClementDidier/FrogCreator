@@ -14,6 +14,15 @@ public class DataPacket
 		this.index = 0;
 	}
 	
+	public DataPacket(byte[] buffer)
+	{
+		this();
+		for(byte b : buffer)
+		{
+			this.dump.add(b);
+		}
+	}
+	
 	public byte readByte()
 	{
 		if(this.index == this.dump.size())
@@ -68,6 +77,19 @@ public class DataPacket
 		return Double.longBitsToDouble(this.readLong());
 	}
 	
+	public String readString()
+	{
+		StringBuilder sb = new StringBuilder();
+		int stringSize = this.readInt();
+		
+		for(int i = 0; i < stringSize; i++)
+		{
+			sb.append(this.readChar());
+		}
+		
+		return sb.toString();
+	}
+	
 	public void write(byte b)
 	{
 		if(this.index >= this.dump.size())
@@ -113,6 +135,16 @@ public class DataPacket
 	public void write(double d) 
 	{
 		this.write(Double.doubleToLongBits(d));
+	}
+	
+	public void write(String s) 
+	{
+		this.write(s.length());
+		
+		for(int i = 0; i < s.length(); i++)
+		{
+			this.write(s.charAt(i));
+		}
 	}
 	
 	public void resetPointer()
