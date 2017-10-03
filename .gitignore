@@ -64,5 +64,7 @@ $RECYCLE.BIN/
 *.classpath
 *.project
 *.prefs
-/.settings/
-/bin/
+
+/.settings
+/bin
+/target/

@@ -1,8 +1,7 @@
 package com.frog.tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -15,7 +14,7 @@ public class DataPacketTest
 	{
 		DataPacket packet = new DataPacket();
 		packet.readByte();
-		fail("La fonction n'a pas remontée l'exception attendue");
+		fail("La fonction n'a pas remontï¿½e l'exception attendue");
 	}
 	
 	@Test
