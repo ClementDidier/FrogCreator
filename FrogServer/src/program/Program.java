@@ -53,7 +53,7 @@ public class Program
 		// Pool de threads client
 		ExecutorService threadPool = Executors.newFixedThreadPool(MAX_THREAD);
 		
-		Program.log("Création de gestionnaire de requêtes...");
+		Program.log("Création du gestionnaire de requêtes...");
 		// Création du gestionnaire de requêtes
 		RequestManager requestManager = new RequestManager();
 		
@@ -68,7 +68,7 @@ public class Program
 				// Attente d'une connexion entrante
 				Socket clientSocket = server.accept();
 				
-				System.out.println("Nouveau client accepté !");
+				System.out.println("Nouveau client " + clientSocket.getInetAddress().getHostAddress());
 				
 				// Ajout du client stub dans la pool
 				threadPool.submit(new ClientWorker(clientSocket, requestManager));

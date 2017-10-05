@@ -31,6 +31,20 @@ public class DataPacket
 		return this.dump.get(index++).byteValue();
 	}
 	
+	public byte[] readToEnd()
+	{
+		if(this.getCursorPosition() >= this.getDumpSize())
+			throw new OutOfMemoryError("Tentative de lecture d'un octet en dehors du dump");
+		
+		byte[] result = new byte[this.getDumpSize() - this.getCursorPosition()];
+		for(int i = this.getCursorPosition(), j = 0; i < this.getDumpSize(); i = this.getCursorPosition(), j++)
+		{
+			result[j] = this.readByte();
+		}
+		
+		return result;
+	}
+	
 	public char readChar()
 	{
 		return (char)this.readByte();
@@ -97,6 +111,14 @@ public class DataPacket
 		else
 			this.dump.set(this.index, b);
 		this.index++;
+	}
+	
+	public void write(byte[] bytes)
+	{
+		for(byte b : bytes)
+		{
+			this.write(b);
+		}
 	}
 	
 	public void write(char c)
