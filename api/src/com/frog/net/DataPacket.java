@@ -1,4 +1,4 @@
-package com.frog.net;
+package net;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,7 @@ package concurrent;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.frog.net.*;
+import net.Request;
 
 public class RequestManager 
 {

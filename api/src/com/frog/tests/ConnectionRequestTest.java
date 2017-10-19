@@ -1,18 +1,18 @@
-package com.frog.tests;
+package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
 
 import org.junit.Test;
 
-import com.frog.net.DataPacket;
-import com.frog.net.Request;
-import com.frog.net.RequestType;
-import com.frog.net.request.ConnectionRequest;
+import net.DataPacket;
+import net.Request;
+import net.RequestType;
+import net.request.ConnectionRequest;
 
 public class ConnectionRequestTest 
 {

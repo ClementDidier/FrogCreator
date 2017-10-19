@@ -1,4 +1,4 @@
-package com.frog.net;
+package net;
 
 public enum RequestType 
 {

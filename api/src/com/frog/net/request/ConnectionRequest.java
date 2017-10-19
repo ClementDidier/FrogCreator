@@ -1,10 +1,10 @@
-package com.frog.net.request;
+package net.request;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.frog.net.Request;
-import com.frog.net.RequestType;
+import net.Request;
+import net.RequestType;
 
 public class ConnectionRequest extends Request 
 {

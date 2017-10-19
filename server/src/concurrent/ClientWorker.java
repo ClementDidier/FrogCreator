@@ -5,10 +5,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import com.frog.net.Request;
-import com.frog.net.RequestResult;
-import com.frog.net.RequestType;
-
+import net.Request;
+import net.RequestResult;
+import net.RequestType;
 import program.Program;
 
 public class ClientWorker implements Runnable, RequestExecutionFinishedListener

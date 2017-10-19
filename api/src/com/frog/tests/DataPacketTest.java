@@ -1,11 +1,13 @@
-package com.frog.tests;
+package tests;
 
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.frog.net.DataPacket;
+import net.DataPacket;
 
 public class DataPacketTest 
 {

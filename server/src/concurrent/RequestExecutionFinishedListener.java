@@ -1,6 +1,6 @@
 package concurrent;
 
-import com.frog.net.RequestResult;
+import net.RequestResult;
 
 public interface RequestExecutionFinishedListener 
 {

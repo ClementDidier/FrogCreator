@@ -1,4 +1,4 @@
-package com.frog.plugin;
+package plugin;
 
 @FrogPlugin
 public interface Plugin 

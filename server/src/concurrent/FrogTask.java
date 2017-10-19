@@ -1,6 +1,6 @@
 package concurrent;
 
-import com.frog.net.Request;
+import net.Request;
 
 public class FrogTask
 {
