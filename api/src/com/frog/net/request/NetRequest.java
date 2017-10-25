@@ -1,26 +1,28 @@
-package net;
+package net.request;
 
-public class Request 
+import net.DataPacket;
+
+public class NetRequest 
 {
-	private RequestType type;
+	private NetRequestType type;
 	
 	protected DataPacket data;
 	
-	public Request()
+	public NetRequest()
 	{
-		this.type = RequestType.NONE;
+		this.type = NetRequestType.NONE;
 		this.data = new DataPacket();
 		this.data.write(this.type.getByte());
 	}
 	
-	public Request(RequestType type)
+	public NetRequest(NetRequestType type)
 	{
 		this.type = type;
 		this.data = new DataPacket();
 		this.data.write(this.type.getByte());
 	}
 	
-	public RequestType getType()
+	public NetRequestType getType()
 	{
 		return this.type;
 	}

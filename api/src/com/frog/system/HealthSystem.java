@@ -1,7 +1,7 @@
 package system;
 
-import event.GameEvent;
-import event.GameEventType;
+import system.events.GameEvent;
+import system.events.GameEventType;
 import utils.FrogException;
 
 public class HealthSystem extends AbstractSystem 

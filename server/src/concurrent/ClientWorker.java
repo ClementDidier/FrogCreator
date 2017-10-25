@@ -5,9 +5,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import net.Request;
-import net.RequestResult;
-import net.RequestType;
+import net.request.NetRequest;
+import net.request.NetRequestResult;
+import net.request.NetRequestType;
 import program.Program;
 
 public class ClientWorker implements Runnable, RequestExecutionFinishedListener
@@ -37,7 +37,7 @@ public class ClientWorker implements Runnable, RequestExecutionFinishedListener
 			try {
 				String str = this.in.readLine();
 				if(str == "1")
-					this.manager.submit(new Request(RequestType.CONNECT), this);
+					this.manager.submit(new NetRequest(NetRequestType.CONNECT), this);
 			} catch (IOException e) {
 				e.printStackTrace();
 				break;
@@ -47,7 +47,7 @@ public class ClientWorker implements Runnable, RequestExecutionFinishedListener
 	}
 
 	@Override
-	public void requestExecutionFinished(RequestResult result) 
+	public void requestExecutionFinished(NetRequestResult result) 
 	{
 		System.out.println("Resultat de la requete : " + result.toString());
 	}

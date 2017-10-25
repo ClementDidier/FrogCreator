@@ -1,4 +1,4 @@
-package event;
+package system.events;
 
 public class GameEvent 
 {

@@ -1,4 +1,4 @@
-package common;
+package entities;
 
 public interface IUpdatable 
 {

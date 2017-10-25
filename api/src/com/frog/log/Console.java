@@ -1,9 +1,11 @@
-package utils;
+package log;
 
 import java.io.IOException;
 import java.time.Instant;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
+
+import utils.FrogException;
 
 public class Console 
 {

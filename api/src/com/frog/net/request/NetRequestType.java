@@ -1,6 +1,6 @@
-package net;
+package net.request;
 
-public enum RequestType 
+public enum NetRequestType 
 {
 	NONE((byte)0),
 	CONNECT((byte)1),
@@ -8,7 +8,7 @@ public enum RequestType
 	
 	private Byte b;
 	
-	RequestType(Byte b)
+	NetRequestType(Byte b)
 	{
 		this.b = b;
 	}

@@ -10,19 +10,19 @@ import java.security.NoSuchAlgorithmException;
 import org.junit.Test;
 
 import net.DataPacket;
-import net.Request;
-import net.RequestType;
 import net.request.ConnectionRequest;
+import net.request.NetRequest;
+import net.request.NetRequestType;
 
 public class ConnectionRequestTest 
 {
 	@Test
 	public void connectionRequestTest() throws UnsupportedEncodingException
 	{
-		Request connectionRequest = new ConnectionRequest("compte", "password");
+		NetRequest connectionRequest = new ConnectionRequest("compte", "password");
 		DataPacket packet = connectionRequest.getData();
 		packet.resetPointer();
-		assertEquals("Le type de la requête n'est pas correcte", RequestType.CONNECT.getByte().byteValue(), packet.readByte());
+		assertEquals("Le type de la requête n'est pas correcte", NetRequestType.CONNECT.getByte().byteValue(), packet.readByte());
 		assertEquals("Le nom de compte en entrée n'est pas égal à celui en sortie", "compte", packet.readString());
 		
 		byte[] hash = null;

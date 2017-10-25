@@ -3,8 +3,8 @@ package system;
 import java.util.ArrayList;
 import java.util.List;
 
-import event.GameEvent;
 import system.AbstractSystem;
+import system.events.GameEvent;
 import utils.FrogException;
 
 public class GameSystem 

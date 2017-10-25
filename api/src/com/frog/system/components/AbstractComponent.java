@@ -1,7 +1,7 @@
-package component;
+package system.components;
 
-import common.IUpdatable;
-import common.data.Entity;
+import entities.Entity;
+import entities.IUpdatable;
 
 public abstract class AbstractComponent implements IUpdatable
 {

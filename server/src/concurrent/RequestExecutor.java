@@ -2,8 +2,8 @@ package concurrent;
 
 import java.util.concurrent.BlockingQueue;
 
-import net.Request;
-import net.RequestResult;
+import net.request.NetRequest;
+import net.request.NetRequestResult;
 import program.Program;
 
 public class RequestExecutor extends Thread
@@ -25,8 +25,8 @@ public class RequestExecutor extends Thread
 				// Prend une tâche à réaliser
 				FrogTask task = this.queue.take();
 				// Extrait la requête associée
-				Request request = task.getRequest();
-				RequestResult result = new RequestResult(); // Resultat de l'execution
+				NetRequest request = task.getRequest();
+				NetRequestResult result = new NetRequestResult(); // Resultat de l'execution
 				
 				// Recherche et execution synchronisée de la requete
 				switch(request.getType())

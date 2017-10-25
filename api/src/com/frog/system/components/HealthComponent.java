@@ -1,8 +1,8 @@
-package component;
+package system.components;
 
-import event.GameEvent;
-import event.GameEventType;
 import system.GameSystem;
+import system.events.GameEvent;
+import system.events.GameEventType;
 
 public class HealthComponent extends AbstractComponent 
 {

@@ -3,10 +3,10 @@ package system;
 import java.util.EnumSet;
 import java.util.Stack;
 
-import common.IUpdatable;
-import event.GameEvent;
-import event.GameEventType;
-import utils.Console;
+import entities.IUpdatable;
+import log.Console;
+import system.events.GameEvent;
+import system.events.GameEventType;
 import utils.FrogException;
 
 public abstract class AbstractSystem implements IUpdatable
