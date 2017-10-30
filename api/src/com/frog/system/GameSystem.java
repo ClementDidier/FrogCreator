@@ -14,7 +14,7 @@ public class GameSystem
 	
 	private List<AbstractSystem> systems;
 	
-	public GameSystem()
+	private GameSystem()
 	{
 		this.systems = new ArrayList<AbstractSystem>();
 	}
