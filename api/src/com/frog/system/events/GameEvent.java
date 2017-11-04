@@ -1,4 +1,4 @@
-package system.events;
+package com.frog.system.events;
 
 public class GameEvent 
 {

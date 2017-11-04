@@ -1,13 +1,13 @@
-package system;
+package com.frog.system;
 
 import java.util.EnumSet;
 import java.util.Stack;
 
-import entities.IUpdatable;
-import log.Console;
-import system.events.GameEvent;
-import system.events.GameEventType;
-import utils.FrogException;
+import com.frog.entities.IUpdatable;
+import com.frog.log.Console;
+import com.frog.system.events.GameEvent;
+import com.frog.system.events.GameEventType;
+import com.frog.utils.FrogException;
 
 public abstract class AbstractSystem implements IUpdatable
 {

@@ -1,8 +1,8 @@
-package system.components;
+package com.frog.system.components;
 
-import system.GameSystem;
-import system.events.GameEvent;
-import system.events.GameEventType;
+import com.frog.system.GameSystem;
+import com.frog.system.events.GameEvent;
+import com.frog.system.events.GameEventType;
 
 public class HealthComponent extends AbstractComponent 
 {

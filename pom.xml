@@ -3,6 +3,7 @@
   <groupId>frogcreator</groupId>
   <artifactId>frogcreator</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
   <dependencies>
   <!-- https://mvnrepository.com/artifact/junit/junit -->
 	<dependency>
@@ -25,4 +26,9 @@
       </plugin>
     </plugins>
   </build>
+  <modules>
+  	<module>api</module>
+  	<module>client</module>
+  	<module>server</module>
+  </modules>
 </project>

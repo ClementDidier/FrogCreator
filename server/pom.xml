@@ -2,7 +2,6 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.frog.server</groupId>
   <artifactId>server</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
@@ -23,4 +22,10 @@
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
+  <parent>
+  	<groupId>frogcreator</groupId>
+  	<artifactId>frogcreator</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<relativePath>..</relativePath>
+  </parent>
 </project>

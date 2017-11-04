@@ -2,8 +2,9 @@ package concurrent;
 
 import java.util.concurrent.BlockingQueue;
 
-import net.request.NetRequest;
-import net.request.NetRequestResult;
+import com.frog.net.request.NetRequest;
+import com.frog.net.request.NetRequestResult;
+
 import program.Program;
 
 public class RequestExecutor extends Thread

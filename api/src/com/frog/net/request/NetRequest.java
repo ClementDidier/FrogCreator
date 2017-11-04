@@ -1,6 +1,6 @@
-package net.request;
+package com.frog.net.request;
 
-import net.DataPacket;
+import com.frog.net.DataPacket;
 
 public class NetRequest 
 {

@@ -1,4 +1,4 @@
-package tests;
+package com.frog;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -9,12 +9,12 @@ import java.security.NoSuchAlgorithmException;
 
 import org.junit.Test;
 
-import net.DataPacket;
-import net.request.ConnectionRequest;
-import net.request.NetRequest;
-import net.request.NetRequestType;
+import com.frog.net.DataPacket;
+import com.frog.net.request.ConnectionRequest;
+import com.frog.net.request.NetRequest;
+import com.frog.net.request.NetRequestType;
 
-public class ConnectionRequestTest 
+public class ConnectionRequestTest
 {
 	@Test
 	public void connectionRequestTest() throws UnsupportedEncodingException
@@ -24,7 +24,7 @@ public class ConnectionRequestTest
 		packet.resetPointer();
 		assertEquals("Le type de la requête n'est pas correcte", NetRequestType.CONNECT.getByte().byteValue(), packet.readByte());
 		assertEquals("Le nom de compte en entrée n'est pas égal à celui en sortie", "compte", packet.readString());
-		
+
 		byte[] hash = null;
 		try {
 			hash = MessageDigest.getInstance("MD5").digest("password".getBytes());
@@ -34,7 +34,7 @@ public class ConnectionRequestTest
 		}
 		byte[] pwd = packet.readToEnd();
 		String strPwd = new String(pwd);
-		
+
 		assertEquals("Le hash du password en entrée n'est pas égal à celui en sortie", new String(hash), strPwd);
 	}
 }

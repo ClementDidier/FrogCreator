@@ -1,4 +1,4 @@
-package utils;
+package com.frog.utils;
 
 public class FrogException extends Exception 
 {

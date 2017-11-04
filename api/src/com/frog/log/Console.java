@@ -1,11 +1,11 @@
-package log;
+package com.frog.log;
 
 import java.io.IOException;
 import java.time.Instant;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
-import utils.FrogException;
+import com.frog.utils.FrogException;
 
 public class Console 
 {

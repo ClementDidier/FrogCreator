@@ -1,7 +1,7 @@
-package system.components;
+package com.frog.system.components;
 
-import entities.Entity;
-import entities.IUpdatable;
+import com.frog.entities.Entity;
+import com.frog.entities.IUpdatable;
 
 public abstract class AbstractComponent implements IUpdatable
 {

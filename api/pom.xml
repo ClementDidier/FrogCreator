@@ -3,7 +3,6 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.frog.api</groupId>
   <artifactId>api</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   
   <dependencies>
   	<!-- https://mvnrepository.com/artifact/junit/junit -->
@@ -14,4 +13,10 @@
 	    <scope>test</scope>
 	</dependency>
   </dependencies>
+  <parent>
+  	<groupId>frogcreator</groupId>
+  	<artifactId>frogcreator</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<relativePath>..</relativePath>
+  </parent>
 </project>

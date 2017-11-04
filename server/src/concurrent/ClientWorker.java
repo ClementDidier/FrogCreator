@@ -5,9 +5,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import net.request.NetRequest;
-import net.request.NetRequestResult;
-import net.request.NetRequestType;
+import com.frog.net.request.NetRequest;
+import com.frog.net.request.NetRequestResult;
+import com.frog.net.request.NetRequestType;
+
 import program.Program;
 
 public class ClientWorker implements Runnable, RequestExecutionFinishedListener
@@ -15,6 +16,8 @@ public class ClientWorker implements Runnable, RequestExecutionFinishedListener
 	private Socket socket;
 	private RequestManager manager;
 	private BufferedReader in;
+	
+	@SuppressWarnings("unused")
 	private PrintWriter out;
 	
 	public ClientWorker(Socket socket, RequestManager manager) throws IOException

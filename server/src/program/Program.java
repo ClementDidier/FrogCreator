@@ -7,10 +7,11 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.frog.plugin.FrogPlugin;
+import com.frog.plugin.Plugin;
+
 import concurrent.ClientWorker;
 import concurrent.RequestManager;
-import plugin.FrogPlugin;
-import plugin.Plugin;
 import plugin.PluginLoader;
 
 public class Program 

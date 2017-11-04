@@ -1,4 +1,4 @@
-package net.request;
+package com.frog.net.request;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

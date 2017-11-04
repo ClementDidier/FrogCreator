@@ -1,4 +1,4 @@
-package plugin;
+package com.frog.plugin;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -1,9 +1,9 @@
-package localization;
+package com.frog.localization;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import utils.FrogException;
+import com.frog.utils.FrogException;
 
 public class I18nProperties 
 {

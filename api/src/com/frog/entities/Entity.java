@@ -1,4 +1,4 @@
-package entities;
+package com.frog.entities;
 
 public class Entity 
 {

@@ -1,11 +1,9 @@
-package system;
+package com.frog.system;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import system.AbstractSystem;
-import system.events.GameEvent;
-import utils.FrogException;
+import com.frog.system.events.GameEvent;
 
 public class GameSystem 
 {

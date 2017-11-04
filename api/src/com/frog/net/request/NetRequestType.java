@@ -1,4 +1,4 @@
-package net.request;
+package com.frog.net.request;
 
 public enum NetRequestType 
 {

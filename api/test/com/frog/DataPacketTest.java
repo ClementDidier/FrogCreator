@@ -1,4 +1,4 @@
-package tests;
+package com.frog;
 
 
 import static org.junit.Assert.assertEquals;
@@ -7,7 +7,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import net.DataPacket;
+import com.frog.net.DataPacket;
 
 public class DataPacketTest 
 {

@@ -1,4 +1,4 @@
-package security;
+package com.frog.security;
 
 public class RSAEncryption {
 

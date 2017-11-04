@@ -1,8 +1,8 @@
-package system;
+package com.frog.system;
 
-import system.events.GameEvent;
-import system.events.GameEventType;
-import utils.FrogException;
+import com.frog.system.events.GameEvent;
+import com.frog.system.events.GameEventType;
+import com.frog.utils.FrogException;
 
 public class HealthSystem extends AbstractSystem 
 {
