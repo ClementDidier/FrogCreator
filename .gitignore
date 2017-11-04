@@ -65,6 +65,6 @@ $RECYCLE.BIN/
 *.project
 *.prefs
 
-/.settings
-/bin
+*/.settings/*
+*/bin/*
 */target/*
