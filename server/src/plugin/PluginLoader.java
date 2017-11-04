@@ -117,8 +117,8 @@ public class PluginLoader<T>
 					}
 					catch(ClassCastException e)
 					{
-						// Cas de cast d'une classe avec l'annotation @Plugin mais qui n'implémente pas Plugin
-						System.err.println("Une classe annoté ne correspond pas au type de plugin attendu. (" + classe + ")");
+						// Cas de cast d'une classe avec l'annotation @Plugin mais qui n'implï¿½mente pas Plugin
+						System.err.println("Une classe annotÃ©e ne correspond pas au type de plugin attendu. (" + classe + ")");
 					}
 				}
 			}
