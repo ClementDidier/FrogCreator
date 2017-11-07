@@ -52,9 +52,9 @@ public class I18nTest {
 	@Test
 	public void changeLocaleToFRTest() throws FrogException
 	{
-		this.properties.setDefault(Locale.FRENCH);
+		this.properties.setDefault(Locale.FRANCE);
 		this.properties.reload();
-		assertEquals("Locales différentes", Locale.FRENCH, this.properties.getCurrentLocale());
+		assertEquals("Locales différentes", Locale.FRANCE, this.properties.getCurrentLocale());
 	}
 	
 	@Test(expected=FrogException.class)
@@ -76,7 +76,7 @@ public class I18nTest {
 	@Test
 	public void getValidKeyValueFRTest() throws FrogException
 	{
-		this.properties.setDefault(Locale.FRENCH);
+		this.properties.setDefault(Locale.FRANCE);
 		this.properties.reload();
 		String value = this.properties.getString(VALID_KEY);
 		assertEquals("Valeur non égales", VALID_FR_VALUE, value);

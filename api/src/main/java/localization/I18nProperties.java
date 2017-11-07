@@ -70,6 +70,7 @@ public class I18nProperties
 	{
 		try 
 		{
+			ResourceBundle.clearCache();
 			ClassLoader loader = new URLClassLoader((URL[]) this.resourcesPaths.toArray(new URL[0]));
 			this.bundle = ResourceBundle.getBundle(DEFAULT_BUNDLE_NAME, this.locale, loader);
 		}
