@@ -1,5 +1,5 @@
 package entities.characters;
 
-public class Player {
+public class Player extends Character {
 
 }

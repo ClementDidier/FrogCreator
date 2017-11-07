@@ -8,7 +8,7 @@ import system.events.GameEvent;
 public class GameSystem 
 {
 	// TODO : Revoir
-	public static final GameSystem INSTANCE = new GameSystem();
+	public static final GameSystem instance = new GameSystem();
 	
 	private List<AbstractSystem> systems;
 	

@@ -14,4 +14,6 @@ public abstract class AbstractComponent implements IUpdatable
 	public void setParent(Entity parent) {
 		this.parent = parent;
 	}
+	
+	public abstract String getKey();
 }

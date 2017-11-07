@@ -6,6 +6,7 @@ import system.events.GameEventType;
 
 public class HealthComponent extends AbstractComponent 
 {
+	public static final String COMPONENT_KEY = "HealthComponentKey";
 	private int health;
 	
 	public HealthComponent(int maxHealth) 
@@ -17,16 +18,21 @@ public class HealthComponent extends AbstractComponent
 	public void update(float delta) 
 	{
 		if(this.health == 0)
-			GameSystem.INSTANCE.pushEvent(new GameEvent(GameEventType.DEATH, this.getParent()));
+			GameSystem.instance.pushEvent(new GameEvent(GameEventType.DEATH, this.getParent()));
 	}
 
 	public int getHealth() 
 	{
-		return health;
+		return this.health;
 	}
 
 	public void setHealth(int health) 
 	{
 		this.health = health;
+	}
+
+	@Override
+	public String getKey() {
+		return COMPONENT_KEY;
 	}
 }
