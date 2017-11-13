@@ -7,7 +7,6 @@
   </parent>
   <artifactId>server</artifactId>
   <groupId>frogcreator</groupId>
-  <packaging>pom</packaging>
   <dependencies>
   	<dependency>
   		<groupId>frogcreator</groupId>
@@ -15,4 +14,10 @@
   		<version>1.0.0.0</version>
   	</dependency>
   </dependencies>
+  <version>0.0.0.1-SNAPSHOT</version>
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <name>Server</name>
+  <url>http://maven.apache.org</url>
 </project>
