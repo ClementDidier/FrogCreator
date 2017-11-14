@@ -3,6 +3,7 @@ package environment.map;
 import java.util.ArrayList;
 import java.util.List;
 
+import math.Vector2;
 import utils.FrogException;
 
 public class GameMap 
@@ -72,7 +73,7 @@ public class GameMap
 	 * @param y La valeur verticale (axe y) de la position
 	 * @throws FrogException Exception jetée si les indexs sont incorrects, ou que la map n'a pas été redimensionnée correctement
 	 */
-	public void updateChunk(GameMapChunk chunk, int x, int y) throws FrogException
+	public void setChunk(GameMapChunk chunk, int x, int y) throws FrogException
 	{
 		if(x < 0 || y < 0)
 			throw new FrogException("Les indexs ne peuvent être négatifs");
@@ -86,6 +87,42 @@ public class GameMap
 			this.chunks.get(y).set(x, chunk);
 		else
 			throw new FrogException("Error lors de la mise à jour d'un chunk, il se peut que l'augmentation des arrays ait échouée");
+	}
+	
+	/**
+	 * Obtient la position du chunk selon les coordonnées absolues données (en nombre de tuiles)
+	 * @param absoluteX La valeur horizontale (axe x) de la position absolue
+	 * @param absoluteY La valeur verticale (axe y) de la position absolue
+	 * @return La position du chunk encapsulant la position absolue
+	 */
+	public Vector2<Integer> getChunkCoordinatesFromAbsLocation(int absoluteX, int absoluteY)
+	{
+		return new Vector2<>((int)(absoluteX / this.chunkWidth), (int)(absoluteY / this.chunkHeight));
+	}
+	
+	/**
+	 * Met à jour la tuile à la position absolue spécifiée
+	 * @param layerIndex La couche de la tuile
+	 * @param absoluteX La valeur horizontale de la position
+	 * @param absoluteY la valeur verticale de la position
+	 * @param value La nouvelle valeur de la tuile
+	 * @throws FrogException Exception jetée lorsqu'une erreur survient lors de la mise à jour d'un chunk
+	 */
+	public void setTile(int layerIndex, int absoluteX, int absoluteY, int value) throws FrogException
+	{
+		Vector2<Integer> chunkCoords = this.getChunkCoordinatesFromAbsLocation(absoluteX, absoluteY);
+		GameMapChunk chunk = this.getChunk(chunkCoords.getX(), chunkCoords.getY());
+		if(chunk == null)
+		{
+			chunk = new GameMapChunk(this);
+			if(!chunk.hasLayer(layerIndex))
+				chunk.addLayer(layerIndex);
+			this.setChunk(chunk, chunkCoords.getX(), chunkCoords.getY());
+		}
+		
+		int relativeX = absoluteX % chunkWidth;
+		int relativeY = absoluteY % chunkHeight;
+		chunk.setTile(layerIndex, relativeX, relativeY, value);
 	}
 	
 	/**
@@ -157,7 +194,7 @@ public class GameMap
 	 * Obtient la largeur des tuiles de la map
 	 * @return La largeur des tuiles de la map
 	 */
-	int getTileWidth() 
+	protected int getTileWidth() 
 	{
 		return tileWidth;
 	}
@@ -166,7 +203,7 @@ public class GameMap
 	 * Obtient la hauteur des tuiles de la map
 	 * @return La hauteur des tuiles de la map
 	 */
-	int getTileHeight() 
+	protected int getTileHeight() 
 	{
 		return tileHeight;
 	}
@@ -175,7 +212,7 @@ public class GameMap
 	 * Obtient la largeur des chunks de la map, en nombre de tuiles
 	 * @return La largeur des chunks en nombre de tuiles
 	 */
-	int getChunkWidth() 
+	protected int getChunkWidth() 
 	{
 		return chunkWidth;
 	}
@@ -184,7 +221,7 @@ public class GameMap
 	 * Obtient la hauteur des chunks de la map, en nombre de tuiles
 	 * @return La largeur des chunks en nombre de tuiles
 	 */
-	int getChunkHeight() 
+	protected int getChunkHeight() 
 	{
 		return chunkHeight;
 	}

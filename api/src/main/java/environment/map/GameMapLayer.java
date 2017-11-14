@@ -29,8 +29,8 @@ public class GameMapLayer
 	
 	/**
 	 * Met à jour la valeur de la tuile à la position donnée
-	 * @param relativeX
-	 * @param relativeY
+	 * @param relativeX La valeur horizontale relative au chunk de la position donnée
+	 * @param relativeY La valeur verticale relative au chunk de la position donnée
 	 * @param value La nouvelle valeur de la tuile
 	 * @throws FrogException Exception jetée lorsque la position donnée est située en dehors des limites définies
 	 */
