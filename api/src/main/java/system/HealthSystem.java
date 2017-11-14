@@ -28,7 +28,7 @@ public class HealthSystem extends AbstractSystem
 		case DAMAGES:
 			Object[] params = event.getParameters();
 			Entity entity = (Entity)params[0];
-			Entity enenmy = (Entity)params[1];
+			//Entity enemy = (Entity)params[1];
 			Integer damages = (Integer)params[2];
 			HealthComponent component = (HealthComponent) entity.getComponent(HealthComponent.COMPONENT_KEY);
 			Integer health = component.getHealth() - damages;
