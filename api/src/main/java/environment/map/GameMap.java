@@ -27,12 +27,19 @@ public class GameMap
 		this.currentMapWidth = 0;
 	}
 
+	/**
+	 * <p>Ajoute une nouvelle ligne dans la map</p>
+	 * <p>Ligne ajoutée en bas de la map (axe y)</p>
+	 */
 	private void addRow()
 	{
 		this.chunks.add(new ArrayList<GameMapChunk>());
 	}
 	
-	// TODO: Test
+	/**
+	 * Ajoute des colonnes dans la carte jusqu'à l'index spécifié
+	 * @param maxIndex L'index de la dernière colonne à droite (axe x)
+	 */
 	private void addColumns(int maxIndex)
 	{
 		for(int i = 0; i < this.chunks.size(); i++)
@@ -45,6 +52,12 @@ public class GameMap
 		this.currentMapWidth = maxIndex + 1;
 	}
 	
+	/**
+	 * Obtient le chunk à la position spécifiée
+	 * @param x La valeur horizontale (axe x) de la position
+	 * @param y La valeur verticale (axe y) de la position
+	 * @return Obtient le chunk si existant, retourne null dans le cas contraire
+	 */
 	public GameMapChunk getChunk(int x, int y)
 	{
 		if(this.chunks.size() > y && this.chunks.get(y).size() > x)
@@ -52,6 +65,13 @@ public class GameMap
 		return null;
 	}
 	
+	/**
+	 * Met à jour un chunk à une position donnée
+	 * @param chunk Le nouveau chunk (peut être null)
+	 * @param x La valeur horizontale (axe x) de la position
+	 * @param y La valeur verticale (axe y) de la position
+	 * @throws FrogException Exception jetée si les indexs sont incorrects, ou que la map n'a pas été redimensionnée correctement
+	 */
 	public void updateChunk(GameMapChunk chunk, int x, int y) throws FrogException
 	{
 		if(x < 0 || y < 0)
@@ -66,25 +86,22 @@ public class GameMap
 			this.chunks.get(y).set(x, chunk);
 		else
 			throw new FrogException("Error lors de la mise à jour d'un chunk, il se peut que l'augmentation des arrays ait échouée");
-		
-		System.out.println(this.toString());
 	}
 	
-	// TODO: Test
 	/**
-	 * <ul>
-	 * 	<li>Découpe la map automatiquement en fonction des chunks qui l'a compose</li>
-	 * 	<li>La map est coupée pour être la plus petite possible (largeur / hauteur)</li>
-	 * </ul>
+	 * <p>Découpe la map automatiquement en fonction des chunks qui l'a compose</p>
+	 * <p>La map est coupée pour être la plus petite possible (largeur / hauteur)<br/>
+	 * La découpe est faite en partant par le bord bas-droit vers le bord haut-gauche de la map</p>
 	 */
 	public void autoCrop()
 	{	
 		this.autoCropRows();
 		this.autoCropColumns();
-		
-		System.out.println(this.toString());
 	}
 	
+	/**
+	 * Découpe automatiquement les lignes de la carte en partant du bas de la map
+	 */
 	private void autoCropRows()
 	{
 		boolean isRowNull = true;
@@ -107,6 +124,9 @@ public class GameMap
 		}
 	}
 	
+	/**
+	 * Découpe automatiquement les colonnes de la carte en partant de la droite de la map
+	 */
 	public void autoCropColumns()
 	{
 		boolean isColumnNull = true;
@@ -133,36 +153,63 @@ public class GameMap
 		}
 	}
 	
+	/**
+	 * Obtient la largeur des tuiles de la map
+	 * @return La largeur des tuiles de la map
+	 */
 	int getTileWidth() 
 	{
 		return tileWidth;
 	}
 
+	/**
+	 * Obtient la hauteur des tuiles de la map
+	 * @return La hauteur des tuiles de la map
+	 */
 	int getTileHeight() 
 	{
 		return tileHeight;
 	}
 
+	/**
+	 * Obtient la largeur des chunks de la map, en nombre de tuiles
+	 * @return La largeur des chunks en nombre de tuiles
+	 */
 	int getChunkWidth() 
 	{
 		return chunkWidth;
 	}
 
+	/**
+	 * Obtient la hauteur des chunks de la map, en nombre de tuiles
+	 * @return La largeur des chunks en nombre de tuiles
+	 */
 	int getChunkHeight() 
 	{
 		return chunkHeight;
 	}
 	
+	/**
+	 * Obtient la largeur de la map en nombre de chunks
+	 * @return La largeur de la map en nombre de chunks
+	 */
 	public int getWidth()
 	{
 		return this.currentMapWidth;
 	}
 	
+	/**
+	 * Obtient la hauteur de la map en nombre de chunks
+	 * @return La heuteur de la map en nombre de chunks
+	 */
 	public int getHeight()
 	{
 		return this.chunks.size();
 	}
 	
+	/**
+	 * Obtient la représentation textuelle de la map
+	 */
 	@Override
 	public String toString()
 	{

@@ -92,4 +92,16 @@ public class EnvironmentTest {
 		assertEquals("Map ne disposant pas de la bonne largeur courante", 3, this.map.getWidth() - 1);
 		assertEquals("Map ne disposant pas de la bonne hauteur courante", 10, this.map.getHeight() - 1);
 	}
+	
+	@Test(timeout=10000)
+	public void BoostTest() throws FrogException
+	{
+		final int wmax = 10000;
+		final int hmax = 10000;
+		
+		this.map.updateChunk(new GameMapChunk(this.map), wmax, hmax);
+		this.map.autoCrop();
+		this.map.updateChunk(null, wmax, hmax);
+		this.map.autoCrop();
+	}
 }
