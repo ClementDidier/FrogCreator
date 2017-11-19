@@ -54,5 +54,10 @@
       <version>${gdx.version}</version>
       <classifier>natives-desktop</classifier>
     </dependency>
+    <dependency>
+    	<groupId>frogcreator</groupId>
+    	<artifactId>api</artifactId>
+    	<version>1.0.0.0</version>
+    </dependency>
   </dependencies>
 </project>
