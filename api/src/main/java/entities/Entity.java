@@ -3,9 +3,10 @@ package entities;
 import java.util.HashMap;
 
 import system.components.AbstractComponent;
+import system.objects.UpdatableObject;
 import utils.FrogException;
 
-public abstract class Entity 
+public abstract class Entity implements UpdatableObject
 {
 	/**
 	 * Composants système de l'entité
@@ -15,6 +16,15 @@ public abstract class Entity
 	public Entity()
 	{
 		this.components = new HashMap<String, AbstractComponent>();
+	}
+	
+	@Override
+	public void update(float delta)
+	{
+		for(String key : this.components.keySet())
+		{
+			this.components.get(key).update(delta);
+		}
 	}
 	
 	/**

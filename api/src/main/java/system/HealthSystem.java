@@ -13,32 +13,33 @@ public class HealthSystem extends AbstractSystem
 		// Event types accepted
 		super(GameEventType.DAMAGES, GameEventType.HEAL);
 	}
-
-	@Override
-	public void updateHandler(float delta) 
+	
+	public void update(float delta)
 	{
+		// Something
 		
+		super.update(delta);
 	}
 
 	@Override
-	public void eventHandler(GameEvent event) throws FrogException
+	public void eventReceived(GameEvent event) throws FrogException
 	{
 		switch(event.getEventType())
 		{
-		case DAMAGES:
-			Object[] params = event.getParameters();
-			Entity entity = (Entity)params[0];
-			//Entity enemy = (Entity)params[1];
-			Integer damages = (Integer)params[2];
-			HealthComponent component = (HealthComponent) entity.getComponent(HealthComponent.COMPONENT_KEY);
-			Integer health = component.getHealth() - damages;
-			component.setHealth(health >= 0 ? health : 0);
-			break;
-		case HEAL:
-			// TODO : Something
-			break;
-			default:
-				throw new FrogException("Evenement non pris en charge atteint");
+			case DAMAGES:
+				Object[] params = event.getParameters();
+				Entity entity = (Entity) params[0];
+				@SuppressWarnings("unused") Entity enemy = (Entity) params[1];
+				Integer damages = (Integer) params[2];
+				
+				HealthComponent component = (HealthComponent) entity.getComponent(HealthComponent.COMPONENT_KEY);
+				component.decreaseHealth(damages);
+				break;
+			case HEAL:
+				// TODO : Something
+				break;
+				default:
+					throw new FrogException("Evenement non pris en charge atteint");
 		}
 	}
 }

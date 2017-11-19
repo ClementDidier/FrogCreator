@@ -10,7 +10,7 @@ public class GameMap
 {
 	private List<List<GameMapChunk>> chunks;
 	private int tileWidth, tileHeight;
-	private int chunkWidth, chunkHeight;
+	private int chunkTilesCountRow, chunkTilesCountColumn;
 	private int currentMapWidth;
 
 	/**
@@ -18,13 +18,13 @@ public class GameMap
 	 * @param tileWidth Largeur des tuiles
 	 * @param tileHeight Hauteur des tuiles
 	 */
-	public GameMap(int tileWidth, int tileHeight, int chunkWidth, int chunkHeight)
+	public GameMap(int tileWidth, int tileHeight, int chunkTilesCountRow, int chunkTilesCountColumn)
 	{
 		this.chunks = new ArrayList<List<GameMapChunk>>();
 		this.tileWidth = tileWidth;
 		this.tileHeight = tileHeight;
-		this.chunkWidth = chunkWidth;
-		this.chunkHeight = chunkHeight;
+		this.chunkTilesCountRow = chunkTilesCountRow;
+		this.chunkTilesCountColumn = chunkTilesCountColumn;
 		this.currentMapWidth = 0;
 	}
 
@@ -97,7 +97,7 @@ public class GameMap
 	 */
 	public Vector2<Integer> getChunkCoordinatesFromAbsLocation(int absoluteX, int absoluteY)
 	{
-		return new Vector2<>((int)(absoluteX / this.chunkWidth), (int)(absoluteY / this.chunkHeight));
+		return new Vector2<>((int)(absoluteX / this.chunkTilesCountRow), (int)(absoluteY / this.chunkTilesCountColumn));
 	}
 	
 	/**
@@ -120,8 +120,8 @@ public class GameMap
 			this.setChunk(chunk, chunkCoords.getX(), chunkCoords.getY());
 		}
 		
-		int relativeX = absoluteX % chunkWidth;
-		int relativeY = absoluteY % chunkHeight;
+		int relativeX = absoluteX % chunkTilesCountRow;
+		int relativeY = absoluteY % chunkTilesCountColumn;
 		chunk.setTile(layerIndex, relativeX, relativeY, value);
 	}
 	
@@ -212,18 +212,18 @@ public class GameMap
 	 * Obtient la largeur des chunks de la map, en nombre de tuiles
 	 * @return La largeur des chunks en nombre de tuiles
 	 */
-	protected int getChunkWidth() 
+	protected int getChunkTilesCountRow() 
 	{
-		return chunkWidth;
+		return chunkTilesCountRow;
 	}
 
 	/**
 	 * Obtient la hauteur des chunks de la map, en nombre de tuiles
 	 * @return La largeur des chunks en nombre de tuiles
 	 */
-	protected int getChunkHeight() 
+	protected int getChunkTilesCountColumn() 
 	{
-		return chunkHeight;
+		return chunkTilesCountColumn;
 	}
 	
 	/**

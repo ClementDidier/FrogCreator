@@ -3,13 +3,14 @@ package system;
 import java.util.EnumSet;
 import java.util.Stack;
 
-import entities.IUpdatable;
 import log.Console;
 import system.events.GameEvent;
+import system.events.GameEventListener;
 import system.events.GameEventType;
+import system.objects.UpdatableObject;
 import utils.FrogException;
 
-public abstract class AbstractSystem implements IUpdatable
+public abstract class AbstractSystem implements UpdatableObject, GameEventListener
 {
 	protected Stack<GameEvent> eventStack;
 	protected EnumSet<GameEventType> acceptedEventsTypes;
@@ -41,13 +42,11 @@ public abstract class AbstractSystem implements IUpdatable
 	@Override
 	public void update(float delta)
 	{
-		updateHandler(delta);
-		
 		while(!this.eventStack.isEmpty())
 		{
 			try
 			{
-				this.eventHandler(this.eventStack.pop());
+				this.eventReceived(this.eventStack.pop());
 			}
 			catch(FrogException e)
 			{
@@ -55,8 +54,4 @@ public abstract class AbstractSystem implements IUpdatable
 			}
 		}
 	}
-	
-	public abstract void updateHandler(float delta);
-	
-	public abstract void eventHandler(GameEvent event) throws FrogException;
 }

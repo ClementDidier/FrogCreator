@@ -1,8 +1,9 @@
 package environment.map;
 
+import system.objects.ResourceObject;
 import utils.FrogException;
 
-public class GameMapLayer 
+public class GameMapLayer implements ResourceObject
 {
 	private Integer[][] tiles;
 	private int width, height;
@@ -12,6 +13,22 @@ public class GameMapLayer
 		this.tiles = new Integer[height][width];
 		this.width = width;
 		this.height = height;
+	}
+	
+	public void load()
+	{
+		/*for(int x = 0; x < this.width; x++)
+		{
+			for(int y = 0; y < this.height; y++)
+			{
+				// Load Tile (x, y)
+			}
+		}*/
+	}
+	
+	public void unload()
+	{
+		
 	}
 	
 	/**
