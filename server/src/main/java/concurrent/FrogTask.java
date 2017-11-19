@@ -1,21 +1,21 @@
 package concurrent;
 
-import net.request.NetRequest;
+import net.Packet;
 
 public class FrogTask
 {
-	private NetRequest request;
+	private Packet packet;
 	private RequestExecutionFinishedListener callback;
 	
-	public FrogTask(NetRequest request, RequestExecutionFinishedListener callback)
+	public FrogTask(Packet packet, RequestExecutionFinishedListener callback)
 	{
-		this.request = request;
+		this.packet = packet;
 		this.callback = callback;
 	}
 	
-	public NetRequest getRequest()
+	public Packet getPacket()
 	{
-		return this.request;
+		return this.packet;
 	}
 	
 	public RequestExecutionFinishedListener getCallback()

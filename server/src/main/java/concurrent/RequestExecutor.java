@@ -2,9 +2,10 @@ package concurrent;
 
 import java.util.concurrent.BlockingQueue;
 
-import net.request.NetRequest;
-import net.request.NetRequestResult;
+import net.Packet;
+import net.PacketType;
 import program.Program;
+import utils.FrogException;
 
 public class RequestExecutor extends Thread
 {
@@ -25,11 +26,11 @@ public class RequestExecutor extends Thread
 				// Prend une tâche à réaliser
 				FrogTask task = this.queue.take();
 				// Extrait la requête associée
-				NetRequest request = task.getRequest();
-				NetRequestResult result = new NetRequestResult(); // Resultat de l'execution
+				Packet packet = task.getPacket();
+				Packet packetResult = new Packet(PacketType.RESULT, "Nothing"); // Resultat de l'execution // TODO : Revoir
 
 				// Recherche et execution synchronisée de la requete
-				switch(request.getType())
+				switch(packet.getPacketType())
 				{
 					case CONNECT:
 						System.out.println("Connect request synch execution DONE");
@@ -42,9 +43,9 @@ public class RequestExecutor extends Thread
 				// Extrait le callback de la requête
 				RequestExecutionFinishedListener callback = task.getCallback();
 				if(callback != null)
-					callback.requestExecutionFinished(result);
+					callback.requestExecutionFinished(packetResult);
 			}
-			catch (InterruptedException e)
+			catch (InterruptedException | FrogException e)
 			{
 				e.printStackTrace();
 			}

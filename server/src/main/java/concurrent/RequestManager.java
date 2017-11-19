@@ -3,7 +3,7 @@ package concurrent;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import net.request.NetRequest;
+import net.Packet;
 
 public class RequestManager 
 {
@@ -17,8 +17,8 @@ public class RequestManager
 		this.executor.start();
 	}
 	
-	public synchronized void submit(NetRequest request, RequestExecutionFinishedListener callback)
+	public synchronized void submit(Packet packet, RequestExecutionFinishedListener callback)
 	{
-		this.queue.add(new FrogTask(request, callback));
+		this.queue.add(new FrogTask(packet, callback));
 	}
 }

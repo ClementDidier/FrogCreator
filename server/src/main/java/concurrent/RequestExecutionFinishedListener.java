@@ -1,8 +1,8 @@
 package concurrent;
 
-import net.request.NetRequestResult;
+import net.Packet;
 
 public interface RequestExecutionFinishedListener 
 {
-	void requestExecutionFinished(NetRequestResult result);
+	void requestExecutionFinished(Packet result);
 }

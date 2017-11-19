@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import net.request.NetRequest;
-import net.request.NetRequestResult;
-import net.request.NetRequestType;
+import net.Packet;
+import net.PacketType;
 import program.Program;
+import utils.FrogException;
 
 public class ClientWorker implements Runnable, RequestExecutionFinishedListener
 {
@@ -40,8 +40,8 @@ public class ClientWorker implements Runnable, RequestExecutionFinishedListener
 			try {
 				String str = this.in.readLine();
 				if(str == "1")
-					this.manager.submit(new NetRequest(NetRequestType.CONNECT), this);
-			} catch (IOException e) {
+					this.manager.submit(new Packet(PacketType.CONNECT, "Nothing"), this); // TODO : Revoir
+			} catch (IOException | FrogException e) {
 				e.printStackTrace();
 				break;
 			}
@@ -50,7 +50,7 @@ public class ClientWorker implements Runnable, RequestExecutionFinishedListener
 	}
 
 	@Override
-	public void requestExecutionFinished(NetRequestResult result) 
+	public void requestExecutionFinished(Packet result) 
 	{
 		System.out.println("Resultat de la requete : " + result.toString());
 	}
