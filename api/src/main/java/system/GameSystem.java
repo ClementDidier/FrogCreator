@@ -59,7 +59,7 @@ public class GameSystem
 	{
 		for(AbstractSystem system : this.systems)
 		{
-			if(system.acceptEventType(event.getEventType()))
+			if(system.isAcceptedEventType(event.getEventType()))
 			{
 				system.pushEvent(event);
 			}

@@ -29,12 +29,21 @@ public abstract class AbstractSystem implements UpdatableObject, GameEventListen
 			this.acceptedEventsTypes.add(type);
 	}
 	
+	/**
+	 * Ajoute un nouvel évènement au système
+	 * @param event Le nouvel évènement
+	 */
 	public void pushEvent(GameEvent event)
 	{
 		this.eventStack.push(event);
 	}
 	
-	public boolean acceptEventType(GameEventType type)
+	/**
+	 * Permet de savoir si le système prend en charge le type d'évènement spécifié
+	 * @param type Le type d'évènement à tester
+	 * @return Vrai si le type d'évènement spécifié est pris en charge par le système, Faux dans le cas contraire
+	 */
+	public boolean isAcceptedEventType(GameEventType type)
 	{
 		return this.acceptedEventsTypes.contains(type);
 	}

@@ -1,9 +1,14 @@
 package game.graphics.screens;
 
+import game.FrogGame;
 import game.graphics.GameBatch;
-import game.graphics.GameScreen;
 
-public class CharacterSelectionScreen extends GameScreen {
+public class CharacterSelectionScreen extends AbstractScreen {
+
+	public CharacterSelectionScreen(FrogGame game)
+	{
+		super(game);
+	}
 
 	@Override
 	public void draw(GameBatch batch) {
@@ -19,8 +24,9 @@ public class CharacterSelectionScreen extends GameScreen {
 
 	@Override
 	public void load() {
-		// TODO Auto-generated method stub
+		super.load();
 		
+		this.isLoaded = true;
 	}
 
 	@Override
@@ -29,4 +35,9 @@ public class CharacterSelectionScreen extends GameScreen {
 		
 	}
 
+	@Override
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
 }

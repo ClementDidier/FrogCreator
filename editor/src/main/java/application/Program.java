@@ -10,6 +10,11 @@ public class Program extends Application
 	private static final int DEFAULT_WINDOW_WIDTH = 800;
 	private static final int DEFAULT_WINDOW_HEIGHT = 600;
 	
+	public static void main(String[] args) 
+	{
+		launch(args);
+	}
+
 	@Override
 	public void start(Stage primaryStage) 
 	{
@@ -26,9 +31,4 @@ public class Program extends Application
 			e.printStackTrace();
 		}
 	}
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
-
 }

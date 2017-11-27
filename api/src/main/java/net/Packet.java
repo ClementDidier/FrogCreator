@@ -1,42 +1,27 @@
 package net;
 
-import java.io.UnsupportedEncodingException;
-
 import org.json.JSONObject;
 
+import system.objects.SerializableObject;
 import utils.FrogException;
 
-public class Packet 
+public class Packet implements SerializableObject
 {
-	protected static final String ENCODING = "UTF-8";
 	protected static final String PACKET_TYPE_KEY = "PacketType";
 	protected static final String PACKET_OBJECT_KEY = "PacketObject";
 	
-	private byte[] data;
 	private PacketType packetType;
-	private String jsonObject;
-	private String finalObject;
+	private String serialObject;
 	
 	private Packet()
 	{
 		// nothing
 	}
 	
-	public Packet(PacketType packetType, String jsonObject) throws FrogException
+	public Packet(PacketType packetType, String serialObject)
 	{
 		this.packetType = packetType;
-		this.jsonObject = jsonObject;
-		
-		JSONObject obj = new JSONObject();
-		obj.put(PACKET_TYPE_KEY, this.packetType.ordinal());
-		obj.put(PACKET_OBJECT_KEY, this.jsonObject);
-		this.finalObject = obj.toString();
-		
-		try {
-			this.data = this.finalObject.getBytes(ENCODING);
-		} catch (UnsupportedEncodingException e) {
-			throw new FrogException("Erreur lors de la tentative de transformation des données");
-		}
+		this.serialObject = serialObject;
 	}
 	
 	public PacketType getPacketType()
@@ -44,26 +29,19 @@ public class Packet
 		return this.packetType;
 	}
 	
-	public String getJsonObject()
+	public String getSerializedObject()
 	{
-		return this.jsonObject;
+		return this.serialObject;
 	}
 	
-	public byte[] getData()
-	{
-		return this.data;
-	}
-	
-	public static Packet getPacket(byte[] data) throws FrogException
+	public static Packet getPacket(String jsonData) throws FrogException
 	{
 		Packet p = new Packet();
-		p.data = data;
 		try 
 		{
-			p.finalObject = new String(data, ENCODING);
-			JSONObject obj = new JSONObject(p.finalObject);
+			JSONObject obj = new JSONObject(jsonData);
 			p.packetType = PacketType.values()[obj.getInt(PACKET_TYPE_KEY)];
-			p.jsonObject = obj.getString(PACKET_OBJECT_KEY);
+			p.serialObject = obj.getString(PACKET_OBJECT_KEY);
 		} 
 		catch (Exception e) 
 		{
@@ -72,9 +50,13 @@ public class Packet
 		
 		return p;
 	}
-	
-	public String toString()
+
+	@Override
+	public String toJSON() 
 	{
-		return this.finalObject;
+		JSONObject obj = new JSONObject();
+		obj.put(PACKET_TYPE_KEY, this.packetType.ordinal());
+		obj.put(PACKET_OBJECT_KEY, this.serialObject);
+		return obj.toString();
 	}
 }

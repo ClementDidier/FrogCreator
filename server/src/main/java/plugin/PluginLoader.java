@@ -20,13 +20,21 @@ public class PluginLoader<T>
 	private Class<? extends Annotation> annotationClass;
 	private String pluginFolder;
 	
-	
+	/**
+	 * Constructeur du chargeur de plugins
+	 * @param pluginFolder Chemin vers le dossier de plugins à charger
+	 * @param annotationClass Type d'annotation présente dans les classes de plugins
+	 */
 	public PluginLoader(String pluginFolder, Class<? extends Annotation> annotationClass)
 	{
 		this.annotationClass = annotationClass;
 		this.pluginFolder = pluginFolder;
 	}
 	
+	/**
+	 * Obtient la liste des fichiers ".jar" du dossier de plugins
+	 * @return La liste des fichiers ".jar" du dossier de plugins
+	 */
 	private File[] getJarFiles()
 	{
 		File pluginsDir = new File(this.pluginFolder);
@@ -44,6 +52,12 @@ public class PluginLoader<T>
 		return jarFiles;
 	}
 	
+	/**
+	 * Obtient la liste de noms de classes disponibles dans le package ".jar"
+	 * @param jarfile Le package ".jar" à analyser
+	 * @return La liste des noms de classes présentes dans le package spécifié
+	 * @throws IOException Exception jetée lorsqu'une erreur survient lors de la lecture du package spécifié
+	 */
 	private List<String> getClassesNameFromJar(String jarfile) throws IOException
 	{
 		List<String> classes = new ArrayList<String>();
@@ -68,6 +82,14 @@ public class PluginLoader<T>
 		return classes;
 	}
 	
+	/**
+	 * Obtient la liste de noms de classes du package diposant de l'annotation recherchée
+	 * @param jarfile Le package à analyser
+	 * @param annotationClass Le type d'annotation à rechercher
+	 * @return La liste de noms de classes disposant d'une/de plusieurs annotations recherchée
+	 * @throws ClassNotFoundException 
+	 * @throws IOException
+	 */
 	@SuppressWarnings("unchecked")
 	private List<String> getAnnotedClassFromJar(String jarfile, Class<?> annotationClass) throws ClassNotFoundException, IOException
 	{

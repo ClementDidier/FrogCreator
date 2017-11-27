@@ -16,7 +16,7 @@ import plugin.PluginLoader;
 public class Program 
 {
 	private final static int MAX_THREAD = 10;
-	private final static int PORT = 4000;
+	private final static int PORT = 5000;
 	
 	private final static String PLUGINS_FOLDER = "plugins";
 	private final static Class<FrogPlugin> PLUGIN_ANNOTATION_CLASS = FrogPlugin.class;
@@ -60,6 +60,7 @@ public class Program
 		Program.log("Lancement du serveur d'écoute sur le port " + PORT);
 		try (ServerSocket server = new ServerSocket(PORT))
 		{
+			
 			Program.log("En attente de clients...");
 			
 			while(!Program.isStopped())
@@ -75,6 +76,9 @@ public class Program
 			
 			// Force tous les threads client à s'arrêter
 			threadPool.shutdownNow();
+			
+			for(Plugin plugin : plugins)
+				plugin.unload();
 		} 
 		catch(BindException e)
 		{

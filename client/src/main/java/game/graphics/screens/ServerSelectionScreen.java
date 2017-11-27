@@ -1,32 +1,48 @@
 package game.graphics.screens;
 
+import game.FrogGame;
 import game.graphics.GameBatch;
-import game.graphics.GameScreen;
 
-public class ServerSelectionScreen extends GameScreen {
+public class ServerSelectionScreen extends AbstractScreen 
+{
+	public ServerSelectionScreen(FrogGame game) 
+	{
+		super(game);
+	}
 
 	@Override
-	public void draw(GameBatch batch) {
+	public void draw(GameBatch batch) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void update(float delta) {
+	public void update(float delta) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void load() {
+	public void load() 
+	{
+		super.load();
+		
+		this.isLoaded = true;
+	}
+
+	@Override
+	public void unload() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void unload() {
+	public void resize(int width, int height) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

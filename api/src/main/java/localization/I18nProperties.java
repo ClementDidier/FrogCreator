@@ -102,7 +102,7 @@ public class I18nProperties
 	public String getString(String key) throws FrogException
 	{
 		if(!this.bundle.containsKey(key))
-			throw new FrogException(String.format("The specified key \"\" does not exists in the collection", key));
+			throw new FrogException(String.format("The specified key \"%s\" does not exists in the collection", key));
 		
 		return this.bundle.getString(key);
 	}

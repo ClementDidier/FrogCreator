@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 
 import net.Packet;
-import net.PacketType;
 import program.Program;
 import utils.FrogException;
 
@@ -16,8 +16,6 @@ public class ClientWorker implements Runnable, RequestExecutionFinishedListener
 	private Socket socket;
 	private RequestManager manager;
 	private BufferedReader in;
-	
-	@SuppressWarnings("unused")
 	private PrintWriter out;
 	
 	public ClientWorker(Socket socket, RequestManager manager) throws IOException
@@ -33,15 +31,27 @@ public class ClientWorker implements Runnable, RequestExecutionFinishedListener
 	@Override
 	public void run() 
 	{
-		while(this.socket.isConnected() && !Program.isStopped())
+		while(this.socket.isConnected() && !this.socket.isClosed() && !Program.isStopped())
 		{
 			// Logique cliente
 			// TODO: Lecture et execution des requètes reçues
-			try {
+			try 
+			{
 				String str = this.in.readLine();
-				if(str == "1")
-					this.manager.submit(new Packet(PacketType.CONNECT, "Nothing"), this); // TODO : Revoir
-			} catch (IOException | FrogException e) {
+				this.manager.submit(Packet.getPacket(str), this); // TODO : Revoir
+			} 
+			catch(SocketException ex)
+			{
+				// Socket closed
+				System.out.println(String.format("Client %s exited", this.socket.getInetAddress()));
+				try { this.socket.close(); } catch (IOException e) { e.printStackTrace(); break; }
+			} 
+			catch (FrogException e) 
+			{
+				e.printStackTrace();
+			} 
+			catch (IOException e) 
+			{
 				e.printStackTrace();
 				break;
 			}
@@ -53,5 +63,7 @@ public class ClientWorker implements Runnable, RequestExecutionFinishedListener
 	public void requestExecutionFinished(Packet result) 
 	{
 		System.out.println("Resultat de la requete : " + result.toString());
+		this.out.print(result.toJSON());
+		this.out.flush();
 	}
 }

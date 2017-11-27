@@ -1,32 +1,42 @@
 package game.graphics.screens;
 
+import game.FrogGame;
 import game.graphics.GameBatch;
-import game.graphics.GameScreen;
 
-public class MainMenuScreen extends GameScreen {
-
+public class MainMenuScreen extends AbstractScreen 
+{
+	public MainMenuScreen(FrogGame game) 
+	{
+		super(game);
+	}
+	
 	@Override
-	public void draw(GameBatch batch) {
-		// TODO Auto-generated method stub
-
+	public void draw(GameBatch batch) 
+	{
+		
 	}
 
 	@Override
-	public void update(float delta) {
-		// TODO Auto-generated method stub
-
+	public void update(float delta) 
+	{
+		super.update(delta);
 	}
 
 	@Override
-	public void load() {
-		// TODO Auto-generated method stub
-
+	public void load() 
+	{
+		super.load();
+		
+		this.isLoaded = true;
 	}
 
 	@Override
 	public void unload() {
-		// TODO Auto-generated method stub
-
 	}
 
+	@Override
+	public void resize(int width, int height)
+	{
+		
+	}
 }
