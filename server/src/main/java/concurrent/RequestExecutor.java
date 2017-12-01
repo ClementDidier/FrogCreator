@@ -30,29 +30,31 @@ public class RequestExecutor extends Thread
 				Packet packet = task.getPacket();
 				
 				JSONObject obj = new JSONObject();
-
+				PacketType resultType = PacketType.NONE;
+				
 				// Recherche et execution synchronisée de la requete
-				switch(packet.getPacketType())
+				switch(packet.getType())
 				{
 					case CONNECT:
-						System.out.println("CONNECT : Do something with DB");
+						System.out.println("CONNECT : Do something with DB : " + packet.getSerializedObject());
 						// if account OK
 						obj.put("result", true);
 						obj.put("token", "GENERATEDTOKEN1234567890");
 						// else
 						// obj.put("result", false);
+						resultType = PacketType.CONNECT_RESULT;
 						break;
 					default:
 						System.out.println("Default request received...");
 						break;
 				}
 				
-				Packet packetResult = new Packet(PacketType.RESULT, obj.toString()); // Resultat de l'execution // TODO : Revoir
+				Packet packetResult = new Packet(resultType, obj.toString()); // Resultat de l'execution // TODO : Revoir
 
 				// Extrait le callback de la requête
-				RequestExecutionFinishedListener callback = task.getCallback();
+				RequestListener callback = task.getCallback();
 				if(callback != null)
-					callback.requestExecutionFinished(packetResult);
+					callback.onRequestExecutionFinished(packetResult);
 			}
 			catch (InterruptedException e)
 			{

@@ -24,7 +24,7 @@ public class Packet implements SerializableObject
 		this.serialObject = serialObject;
 	}
 	
-	public PacketType getPacketType()
+	public PacketType getType()
 	{
 		return this.packetType;
 	}

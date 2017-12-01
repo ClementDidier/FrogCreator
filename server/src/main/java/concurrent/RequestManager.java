@@ -17,7 +17,7 @@ public class RequestManager
 		this.executor.start();
 	}
 	
-	public synchronized void submit(Packet packet, RequestExecutionFinishedListener callback)
+	public synchronized void submit(Packet packet, RequestListener callback)
 	{
 		this.queue.add(new FrogTask(packet, callback));
 	}

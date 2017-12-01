@@ -5,40 +5,35 @@ import java.net.UnknownHostException;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
+import game.net.GameNetwork;
+import net.IPacketListener;
+import net.Packet;
+import net.PacketBalancer;
+import net.PacketType;
+import utils.FrogException;
+
 public class DesktopLauncher
 {
-	public static void main(String[] args) throws UnknownHostException, IOException
-	{
+	public static void main(String[] args) throws UnknownHostException, IOException, FrogException
+	{	
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Frog Creator - Client";
 		config.width = 1280;
 		config.height = 800;
 		new LwjglApplication(GameClient.getInstance(), config); // new thread
-	}
-	
-	// TODO : Create FrogSocket : try to reconnect each X seconds after disconnection
-	/*private static void initialize() throws UnknownHostException, IOException
-	{
-		try
-		(	Socket socket = new Socket("127.0.0.1", 5000);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			PrintWriter writer = new PrintWriter(socket.getOutputStream(), true))
+		
+		GameNetwork network = new GameNetwork();
+		PacketBalancer balancer = new PacketBalancer();
+		balancer.subscribe(PacketType.CONNECT_RESULT, new IPacketListener() 
 		{
-			System.out.println("Connection...");
-			Packet connectPacket = new Packet(PacketType.CONNECT, "Nothing");
-			writer.println(connectPacket.toJSON());
-			
-			while(true)
+			public void receivePacket(Packet packet) 
 			{
-				try 
-				{
-					System.out.println(reader.readLine());
-				} 
-				catch(SocketException e) 
-				{ 
-					System.err.println("Disconnected from server...");
-				}
+				System.out.println("Connecté au serveur de jeu !\nTOKEN : " + network.getToken());
 			}
-		}
-	}*/
+		});
+		
+		network.addPacketBalancer(balancer);
+		network.start("127.0.0.1", 5000);
+		network.connect("account", "password");
+	}
 }

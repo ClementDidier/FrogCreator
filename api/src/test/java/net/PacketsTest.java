@@ -18,7 +18,7 @@ public class PacketsTest
 		obj.put("test", "value");
 		Packet p = new Packet(PacketType.SYNC, obj.toString());
 		assertEquals("JSONObjects non égaux", obj.toString(), p.getSerializedObject());
-		assertEquals("PacketTypes non égaux", PacketType.SYNC, p.getPacketType());
+		assertEquals("PacketTypes non égaux", PacketType.SYNC, p.getType());
 		
 		JSONObject obj2 = new JSONObject();
 		obj2.put(Packet.PACKET_TYPE_KEY, PacketType.SYNC.ordinal());
@@ -36,7 +36,7 @@ public class PacketsTest
 		
 		Packet p2 = Packet.getPacket(p1.toJSON());
 		assertEquals("JSONObjects non égaux", p1.getSerializedObject(), p2.getSerializedObject());
-		assertEquals("PacketTypes non égaux", p1.getPacketType(), p2.getPacketType());
+		assertEquals("PacketTypes non égaux", p1.getType(), p2.getType());
 		assertEquals("Resultats non égaux", p1.toJSON(), p2.toJSON());
 	}
 }

@@ -5,9 +5,9 @@ import net.Packet;
 public class FrogTask
 {
 	private Packet packet;
-	private RequestExecutionFinishedListener callback;
+	private RequestListener callback;
 	
-	public FrogTask(Packet packet, RequestExecutionFinishedListener callback)
+	public FrogTask(Packet packet, RequestListener callback)
 	{
 		this.packet = packet;
 		this.callback = callback;
@@ -18,7 +18,7 @@ public class FrogTask
 		return this.packet;
 	}
 	
-	public RequestExecutionFinishedListener getCallback()
+	public RequestListener getCallback()
 	{
 		return this.callback;
 	}

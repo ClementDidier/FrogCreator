@@ -11,7 +11,7 @@ import net.Packet;
 import program.Program;
 import utils.FrogException;
 
-public class ClientWorker implements Runnable, RequestExecutionFinishedListener
+public class ClientWorker implements Runnable, RequestListener
 {
 	private Socket socket;
 	private RequestManager manager;
@@ -34,7 +34,7 @@ public class ClientWorker implements Runnable, RequestExecutionFinishedListener
 		while(this.socket.isConnected() && !this.socket.isClosed() && !Program.isStopped())
 		{
 			// Logique cliente
-			// TODO: Lecture et execution des requètes reçues
+			// TODO: Lecture et execution des requêtes reçues
 			try 
 			{
 				String str = this.in.readLine();
@@ -60,10 +60,9 @@ public class ClientWorker implements Runnable, RequestExecutionFinishedListener
 	}
 
 	@Override
-	public void requestExecutionFinished(Packet result) 
+	public void onRequestExecutionFinished(Packet result) 
 	{
 		System.out.println("Resultat de la requete : " + result.toString());
-		this.out.print(result.toJSON());
-		this.out.flush();
+		this.out.println(result.toJSON());
 	}
 }
