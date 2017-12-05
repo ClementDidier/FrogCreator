@@ -15,10 +15,9 @@ public class ScreenManager
 	public static void setScreen(AbstractScreen screen)
 	{
 		AbstractScreen oldScreen = currentScreen;
+		screen.load(); 
+		screen.update(0);
 		currentScreen = screen;
-		
-		if(!currentScreen.isLoaded())
-			currentScreen.load();
 	
 		if(oldScreen != null && currentScreen != screen)
 			oldScreen.unload();
@@ -30,9 +29,7 @@ public class ScreenManager
 			ScreenManager.setScreen(screen);
 		
 		TransitionScreen transitionScreen = new TransitionScreen(GameClient.getInstance(), transition1, screen, transition2);
+		transitionScreen.load();
 		currentScreen = transitionScreen;
-		
-		if(!currentScreen.isLoaded())
-			currentScreen.load();
 	}
 }

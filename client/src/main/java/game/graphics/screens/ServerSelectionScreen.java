@@ -27,9 +27,7 @@ public class ServerSelectionScreen extends AbstractScreen
 	@Override
 	public void load() 
 	{
-		super.load();
 		
-		this.isLoaded = true;
 	}
 
 	@Override

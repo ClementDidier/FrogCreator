@@ -12,6 +12,7 @@ import game.FrogGame;
 import game.graphics.GameBatch;
 import game.graphics.screens.ScreenManager;
 import game.graphics.screens.SplashScreen;
+import game.graphics.screens.effects.ShakeEffect;
 import game.graphics.screens.transitions.FadeInTransition;
 import game.graphics.screens.transitions.FadeOutTransition;
 import math.Vector2;
@@ -40,7 +41,9 @@ public class GameClient extends ApplicationAdapter implements FrogGame
 		this.camera.setToOrtho(false, VIEWPORT.getX(), VIEWPORT.getY());
 		this.viewport = new ScreenViewport(this.camera);
 		
-		ScreenManager.setScreen(new SplashScreen(this), new FadeOutTransition(3000), new FadeInTransition(3000));
+		SplashScreen sp = new SplashScreen(this);
+		sp.startEffect(new ShakeEffect(10, 2000));
+		ScreenManager.setScreen(sp, new FadeOutTransition(3000), new FadeInTransition(3000));
 	}
 	
 	@Override

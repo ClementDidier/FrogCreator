@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 import net.IPacketListener;
 import net.Packet;
-import net.PacketBalancer;
+import net.PacketSubscriber;
 import net.PacketType;
 import utils.FrogException;
 
@@ -24,7 +24,7 @@ public class GameNetwork implements IPacketListener
 	private static final int DURATION_BETWEEN_TENTATIVES = 1000;
 	private static final int TENTATIVES = 10;
 	
-	private List<PacketBalancer> balancers;
+	private List<PacketSubscriber> balancers;
 	private Socket socket;
 	private String token;
 	private boolean isRunning;
@@ -34,7 +34,7 @@ public class GameNetwork implements IPacketListener
 	
 	public GameNetwork()
 	{
-		this.balancers = new ArrayList<PacketBalancer>();
+		this.balancers = new ArrayList<PacketSubscriber>();
 		this.isRunning = false;
 	}
 	
@@ -43,7 +43,7 @@ public class GameNetwork implements IPacketListener
 	 * <p>Les souscripteurs de l'aiguilleur recevront les packets en reception</p>
 	 * @param balancer Le nouveau aiguilleur à ajouter
 	 */
-	public synchronized void addPacketBalancer(PacketBalancer balancer)
+	public synchronized void addPacketSubscribers(PacketSubscriber balancer)
 	{
 		this.balancers.add(balancer);
 	}
@@ -53,7 +53,7 @@ public class GameNetwork implements IPacketListener
 	 * <p>Les souscripteurs de l'aiguilleur ne recevront plus les packets en reception</p>
 	 * @param balancer L'aiguilleur à supprimer
 	 */
-	public synchronized void removePacketBalancer(PacketBalancer balancer)
+	public synchronized void removePacketSubscribers(PacketSubscriber balancer)
 	{
 		this.balancers.remove(balancer);
 	}

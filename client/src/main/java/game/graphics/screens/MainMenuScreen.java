@@ -25,9 +25,7 @@ public class MainMenuScreen extends AbstractScreen
 	@Override
 	public void load() 
 	{
-		super.load();
 		
-		this.isLoaded = true;
 	}
 
 	@Override

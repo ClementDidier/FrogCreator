@@ -26,19 +26,19 @@ public class SplashScreen extends AbstractScreen
 	@Override
 	public void load() 
 	{
-		super.load();
-		this.assetManager.load(Gdx.files.internal("res\\logo.png").path(), Texture.class);
-		this.assetManager.finishLoading();
-		Texture texture = this.assetManager.get(Gdx.files.internal("res\\logo.png").path(), Texture.class);
+		String assetName = Gdx.files.internal("res\\logo.png").path();
+		this.assetManager.load(assetName, Texture.class);
+		this.assetManager.finishLoadingAsset(assetName);
+		Texture texture = this.assetManager.get(assetName, Texture.class);
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		this.logo = new Sprite(texture);
-		this.isLoaded = true;
+		
+		this.assetManager.finishLoading();
 	}
 
 	@Override
 	public void unload() 
 	{
-		// TODO Auto-generated method stub
 
 	}
 

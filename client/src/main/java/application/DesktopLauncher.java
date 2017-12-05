@@ -8,7 +8,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import game.net.GameNetwork;
 import net.IPacketListener;
 import net.Packet;
-import net.PacketBalancer;
+import net.PacketSubscriber;
 import net.PacketType;
 import utils.FrogException;
 
@@ -23,7 +23,7 @@ public class DesktopLauncher
 		new LwjglApplication(GameClient.getInstance(), config); // new thread
 		
 		GameNetwork network = new GameNetwork();
-		PacketBalancer balancer = new PacketBalancer();
+		PacketSubscriber balancer = new PacketSubscriber();
 		balancer.subscribe(PacketType.CONNECT_RESULT, new IPacketListener() 
 		{
 			public void receivePacket(Packet packet) 
@@ -32,7 +32,7 @@ public class DesktopLauncher
 			}
 		});
 		
-		network.addPacketBalancer(balancer);
+		network.addPacketSubscribers(balancer);
 		network.start("127.0.0.1", 5000);
 		network.connect("account", "password");
 	}

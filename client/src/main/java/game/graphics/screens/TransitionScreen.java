@@ -23,7 +23,7 @@ public class TransitionScreen extends AbstractScreen
 	        transition1,
 	        new Transition()
 	        {
-	            @Override public void initialize() { current = nextScreen; if(!current.isLoaded()) current.load(); }
+	            @Override public void initialize() { nextScreen.load(); nextScreen.update(0); current = nextScreen; }
 	            @Override public boolean act(float delta) { return false; }
 	        },
 	        transition2,
@@ -34,14 +34,6 @@ public class TransitionScreen extends AbstractScreen
 	        });
 
         this.transition.initialize();
-    }
-
-    @Override
-    public void load()
-    {
-    	super.load();
-    	
-        this.isLoaded = true;
     }
 
     @Override
@@ -68,6 +60,11 @@ public class TransitionScreen extends AbstractScreen
 
 	@Override
 	public void resize(int width, int height) {
+		
+	}
+
+	@Override
+	public void load() {
 		
 	}
 

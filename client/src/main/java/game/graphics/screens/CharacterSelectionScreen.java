@@ -23,10 +23,9 @@ public class CharacterSelectionScreen extends AbstractScreen {
 	}
 
 	@Override
-	public void load() {
-		super.load();
+	public void load() 
+	{
 		
-		this.isLoaded = true;
 	}
 
 	@Override
