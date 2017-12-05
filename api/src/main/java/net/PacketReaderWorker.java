@@ -1,19 +1,18 @@
-package game.net;
+package net;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.IPacketListener;
-import net.Packet;
+import net.socket.FrogClientSocket;
 import utils.FrogException;
 
-class PacketReaderWorker extends Thread
+public class PacketReaderWorker extends Thread
 {
 	private List<IPacketListener> listeners;
-	private GameNetwork network;
+	private FrogClientSocket network;
 	
-	public PacketReaderWorker(GameNetwork network)
+	public PacketReaderWorker(FrogClientSocket network)
 	{
 		this.listeners = new ArrayList<IPacketListener>();
 		this.network = network;
@@ -26,7 +25,7 @@ class PacketReaderWorker extends Thread
 			try 
 			{
 				System.out.println("Waiting for packets...");
-				String line = this.network.reader.readLine();
+				String line = this.network.getReader().readLine();
 				System.out.println("Packet received : " + line);
 				Packet responsePacket = Packet.getPacket(line);
 				raiseReceivedPacketEvent(responsePacket);
@@ -42,7 +41,7 @@ class PacketReaderWorker extends Thread
 	{
 		for(int i = 0; i < this.listeners.size(); i++)
 		{
-			this.listeners.get(i).receivePacket(packet);
+			this.listeners.get(i).onPacketReceived(packet);
 		}
 	}
 	

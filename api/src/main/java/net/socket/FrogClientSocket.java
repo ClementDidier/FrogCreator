@@ -1,6 +1,7 @@
-package game.net;
+package net.socket;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -12,6 +13,7 @@ import org.json.JSONObject;
 import net.IPacketListener;
 import net.Packet;
 import net.PacketBalancer;
+import net.PacketReaderWorker;
 import net.PacketType;
 import utils.FrogException;
 
@@ -19,8 +21,10 @@ import utils.FrogException;
  * <h1>Gestionnaire de packets internet de jeu</h1>
  * <p>Classe permettant de gérer la communication avec le serveur de jeu</p>
  */
-public class GameNetwork implements IPacketListener
+public class FrogClientSocket implements IPacketListener
 {
+	public static final String PROTOCOL_VERSION = "v0.0.0.1";
+	
 	private static final int DURATION_BETWEEN_TENTATIVES = 1000;
 	private static final int TENTATIVES = 10;
 	
@@ -28,11 +32,10 @@ public class GameNetwork implements IPacketListener
 	private Socket socket;
 	private String token;
 	private boolean isRunning;
+	private BufferedReader reader;
+	private PrintWriter writer;
 	
-	protected BufferedReader reader;
-	protected PrintWriter writer;
-	
-	public GameNetwork()
+	public FrogClientSocket()
 	{
 		this.balancers = new ArrayList<PacketBalancer>();
 		this.isRunning = false;
@@ -79,15 +82,23 @@ public class GameNetwork implements IPacketListener
 	}
 	
 	@Override
-	public void receivePacket(Packet packet) 
+	public void onPacketReceived(Packet packet) 
 	{
-		if(this.token == null && packet.getType() == PacketType.CONNECT_RESULT)
+		switch(packet.getType())
 		{
-			JSONObject obj = new JSONObject(packet.getSerializedObject());
-			boolean result = obj.getBoolean("result");
-			if(result)
-				this.token = obj.getString("token");
+			case CONNECT_RESULT:
+				if(this.token == null)
+				{
+					JSONObject obj = new JSONObject(packet.getSerializedObject());
+					boolean result = obj.getBoolean("result");
+					if(result)
+						this.token = obj.getString("token");
+				}
+				break;
+			default:
+				break;
 		}
+		
 		
 		this.raiseEventToBalancers(packet);
 		
@@ -110,6 +121,24 @@ public class GameNetwork implements IPacketListener
 	public synchronized void stop()
 	{
 		this.isRunning = false;
+	}
+	
+	/**
+	 * Obtient le gestionnaire de flux en entrée
+	 * @return Le gestionnaire de flux en entrée
+	 */
+	public BufferedReader getReader()
+	{
+		return this.reader;
+	}
+	
+	/**
+	 * Obtient le gestionnaire de flux en sortie
+	 * @return Le gestionnaire de flux en sortie
+	 */
+	public PrintWriter getWriter()
+	{
+		return this.writer;
 	}
 	
 	/**
@@ -151,6 +180,23 @@ public class GameNetwork implements IPacketListener
 			{
 				this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				this.writer = new PrintWriter(this.socket.getOutputStream(), true);
+				
+				JSONObject obj = new JSONObject();
+				obj.put("version", PROTOCOL_VERSION);
+				this.sendPacket(new Packet(PacketType.PROTOCOL_VERSION, obj.toString()));
+				Packet p = Packet.getPacket(this.reader.readLine());
+				
+				if(p.getType() != PacketType.PROTOCOL_VERSION_RESULT)
+					throw new FrogException("Mauvais packet reçu; Attendu : PROTOCOL_VERSION_RESULT");
+				
+				JSONObject versionPacket = new JSONObject(p.getSerializedObject());
+				boolean versionResult = versionPacket.getBoolean("result");
+				
+				if(!versionResult)
+				{
+					this.isRunning = false;
+					throw new FrogException("Mauvaise version du protocol de communication");
+				}
 			}
 		}
 		catch(Exception e)
@@ -160,7 +206,7 @@ public class GameNetwork implements IPacketListener
 		
 		return result;
 	}
-
+	
 	/**
 	 * <h1>Tentative de connexion au serveur de jeu</h1>
 	 * <p>Tente une connexion au serveur de jeu avec les informations d'authentification spécifiées.</p>
@@ -170,12 +216,15 @@ public class GameNetwork implements IPacketListener
 	 */
 	public void connect(String account, String password) throws FrogException
 	{
+		this.sendPacket(new Packet(PacketType.CONNECT, "Nothing"));
+	}
+	
+	public void sendPacket(Packet packet) throws FrogException
+	{
 		if(!this.socket.isConnected())
 			throw new FrogException("Tentative de connection au serveur de jeu sur un channel de communication non établi");
 		
-		System.out.println("Tentative de connexion au serveur de jeu...");
-		Packet connectPacket = new Packet(PacketType.CONNECT, "Nothing");
-		writer.println(connectPacket.toJSON());
+		writer.println(packet.toJSON());
 	}
 	
 	/**
@@ -185,7 +234,7 @@ public class GameNetwork implements IPacketListener
 	 */
 	public synchronized boolean isConnected()
 	{
-		if(this.socket != null)
+		if(this.socket != null && !this.socket.isClosed())
 			return this.socket.isConnected();
 		return false;
 	}

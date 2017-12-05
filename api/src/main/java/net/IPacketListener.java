@@ -2,5 +2,5 @@ package net;
 
 public interface IPacketListener 
 {
-	void receivePacket(Packet packet);
+	void onPacketReceived(Packet packet);
 }

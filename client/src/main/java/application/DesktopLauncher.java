@@ -5,11 +5,11 @@ import java.net.UnknownHostException;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import game.net.GameNetwork;
 import net.IPacketListener;
 import net.Packet;
 import net.PacketBalancer;
 import net.PacketType;
+import net.socket.FrogClientSocket;
 import utils.FrogException;
 
 public class DesktopLauncher
@@ -22,11 +22,11 @@ public class DesktopLauncher
 		config.height = 800;
 		new LwjglApplication(GameClient.getInstance(), config); // new thread
 		
-		GameNetwork network = new GameNetwork();
+		FrogClientSocket network = new FrogClientSocket();
 		PacketBalancer balancer = new PacketBalancer();
 		balancer.subscribe(PacketType.CONNECT_RESULT, new IPacketListener() 
 		{
-			public void receivePacket(Packet packet) 
+			public void onPacketReceived(Packet packet) 
 			{
 				System.out.println("Connecté au serveur de jeu !\nTOKEN : " + network.getToken());
 			}
@@ -34,6 +34,8 @@ public class DesktopLauncher
 		
 		network.addPacketBalancer(balancer);
 		network.start("127.0.0.1", 5000);
-		network.connect("account", "password");
+		
+		if(network.isRunning())
+			network.connect("account", "password");
 	}
 }

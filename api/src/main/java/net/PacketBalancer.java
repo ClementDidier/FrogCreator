@@ -34,6 +34,7 @@ public class PacketBalancer
 	
 	public synchronized void pushPacket(Packet packet)
 	{
-		this.listeners.get(packet.getType()).receivePacket(packet);
+		if(this.listeners.containsKey(packet.getType()))
+			this.listeners.get(packet.getType()).onPacketReceived(packet);
 	}
 }
