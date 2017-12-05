@@ -6,21 +6,23 @@ import org.json.JSONObject;
 
 import net.Packet;
 import net.PacketType;
-import program.Program;
+import net.socket.FrogServerSocket;
 
 public class RequestExecutor extends Thread
 {
+	private FrogServerSocket server;
 	private BlockingQueue<FrogTask> queue;
 
-	public RequestExecutor(BlockingQueue<FrogTask> queue)
+	public RequestExecutor(FrogServerSocket server, BlockingQueue<FrogTask> queue)
 	{
+		this.server = server;
 		this.queue = queue;
 	}
 
 	@Override
 	public void run()
 	{
-		while(!Program.isStopped())
+		while(server.isRunning())
 		{
 			try
 			{
@@ -49,8 +51,8 @@ public class RequestExecutor extends Thread
 						break;
 				}
 				
-				Packet packetResult = new Packet(resultType, obj.toString()); // Resultat de l'execution // TODO : Revoir
-
+				Packet packetResult = new Packet(resultType, obj.toString()); // Resultat de l'execution
+				
 				// Extrait le callback de la requête
 				RequestListener callback = task.getCallback();
 				if(callback != null)

@@ -13,7 +13,7 @@ import utils.FrogException;
  * jeu et sont distribuées spécifiquement et de façon optimisé au entitées
  * ayant demandé de les recevoirs.</p>
  */
-public class PacketSubscriber 
+public class PacketSubscriber
 {
 	private HashMap<PacketType, ArrayList<IPacketListener>> listeners;
 	
@@ -49,7 +49,7 @@ public class PacketSubscriber
 			int size = list.size();
 			for(int i = 0; i < size; i++)
 			{
-				list.get(i).receivePacket(packet);
+				list.get(i).onPacketReceived(packet);
 			}
 		}
 	}
